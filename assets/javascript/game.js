@@ -86,7 +86,6 @@ $(document).ready(function(){
         return true;
     });
 
-    console.log(characterChoice);
 
 
 
