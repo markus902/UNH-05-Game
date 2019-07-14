@@ -37,12 +37,13 @@ let darthm = {
 }
 
 let allCharacters = [obi, luke, darths, darthm];
+let characterChoice = false;
 
 $(document).ready(function(){
    
     //generating characters
 
-    for(i = 0; i < 4; i++){
+    for(i = 0; i < allCharacters.length; i++){
         
         let characterContainer = $("<div></div>");
         let characterImage = $("<img>");
@@ -54,7 +55,7 @@ $(document).ready(function(){
 
         characterContainer
         .addClass( "character-container-" + i + " justify-content-center character-container")
-        .css( "border" , "solid green 3px")
+        .css( "border" , "solid green 3px");
         $(".characters").append(characterContainer); 
 
         characterText.text(allCharacters[i].name);
@@ -64,15 +65,30 @@ $(document).ready(function(){
 
         characterHealth.text("Health: " + allCharacters[i].hp);
         $(".character-image-" + i).after(characterHealth); 
+
     }
 
-    //click Event
+    // click Events
+    $(".character-container-0").on("click", function move(characterChoice) {
+        $("div.character-container-0").detach().appendTo("div.character-choice");
+        return true;
+    });
+    $(".character-container-1").on("click", function move() {
+        $("div.character-container-1").detach().appendTo("div.character-choice");
+        return true;
+    });
+    $(".character-container-2").on("click", function move() {
+        $("div.character-container-2").detach().appendTo("div.character-choice");
+        return true;
+    });
+    $(".character-container-3").on("click", function move() {
+        $("div.character-container-3").detach().appendTo("div.character-choice");
+        return true;
+    });
 
-    // $(".character-image").onClick(pickCharacter());
+    console.log(characterChoice);
 
-    // function pickCharacter(){
 
-    // alert("test");}
 
 
    
