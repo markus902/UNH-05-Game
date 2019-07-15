@@ -2,11 +2,12 @@
 
 let obi = {
     "characterNumer" : 1,
-    "name" : "Luke Obi-Wan Kenobi",
+    "name" : "Obi-Wan Kenobi",
     "hp" : 120,
     "ap" : 40,
     "cap" : 40,
-    "image": "./assets/images/obi.png"
+    "image": "./assets/images/obi.png",
+    "chosen": false
 }
 
 let luke = {
@@ -15,7 +16,8 @@ let luke = {
     "hp" : 100,
     "ap" : 30,
     "cap" : 20,
-    "image": "./assets/images/luke.png"
+    "image": "./assets/images/luke.png",
+    "chosen": false
 }
 
 let darths = {
@@ -24,7 +26,8 @@ let darths = {
     "hp" : 110,
     "ap" : 50,
     "cap" : 30,
-    "image": "./assets/images/darths.png"
+    "image": "./assets/images/darths.png",
+    "chosen": false
 }
 
 let darthm = {
@@ -33,11 +36,11 @@ let darthm = {
     "hp" : 180,
     "ap" : 70,
     "cap" : 200,
-    "image": "./assets/images/darthm.png"
+    "image": "./assets/images/darthm.png",
+    "chosen": false
 }
 
 let allCharacters = [obi, luke, darths, darthm];
-let characterChoice = false;
 
 $(document).ready(function(){
    
@@ -45,10 +48,10 @@ $(document).ready(function(){
 
     for(i = 0; i < allCharacters.length; i++){
         
-        let characterContainer = $("<div></div>");
-        let characterImage = $("<img>");
-        let characterText = $("<div></div>");
-        let characterHealth = $("<div></div>");
+        characterContainer = $("<div></div>");
+        characterImage = $("<img>");
+        characterText = $("<div></div>");
+        characterHealth = $("<div></div>");
         characterImage
         .attr("src" , allCharacters[i].image)
         .addClass("character-image character-image-" + i + " clearfix");
@@ -68,41 +71,48 @@ $(document).ready(function(){
 
     }
 
-    // click Events
-    $(".character-container-0").on("click", function move(characterChoice) {
+    // click events for characters
+
+    $(".character-container-0").on("click", function move() {
         $("div.character-container-0").detach().appendTo("div.character-choice");
-        return true;
+        allCharacters[0].chosen = true;
+        chooseDefender();
     });
     $(".character-container-1").on("click", function move() {
-        $("div.character-container-1").detach().appendTo("div.character-choice");
-        return true;
+        $("div.character-container-1").detach().appendTo("div.character-choice");   
+        allCharacters[1].chosen = true;
+        chooseDefender();
     });
     $(".character-container-2").on("click", function move() {
         $("div.character-container-2").detach().appendTo("div.character-choice");
-        return true;
+        allCharacters[2].chosen = true;
+        chooseDefender();
     });
     $(".character-container-3").on("click", function move() {
         $("div.character-container-3").detach().appendTo("div.character-choice");
-        return true;
+        allCharacters[3].chosen = true;
+        chooseDefender();
     });
 
+    
 
-
-
-
+    function chooseDefender(){
+            var computerChoice = Math.floor(Math.random() * allCharacters.length);
+            console.log(computerChoice);
+            var chosenCharacter = allCharacters[computerChoice].chosen;
+            console.log(chosenCharacter);
+                if(chosenCharacter == false){
+                    $(".character-container-" + computerChoice).detach().appendTo("div.defender");
+                }
+                else{
+                    chooseDefender();
+                }
+            };
+    
    
+});
 
+    //DischooseDefendering Characters
 
-
-
-
-
-
-
-
-
-  });
-//Displaying Characters
-
-
-
+    
+    
