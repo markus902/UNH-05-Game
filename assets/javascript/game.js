@@ -81,26 +81,26 @@ $(document).ready(function () {
 
     // click events for characters
 
-    function addClickEvents(){
-    $(".character-container-0").on("click", () => {
-        indexvar = 0;
-        characterMove();
-    });
+    function addClickEvents() {
+        $(".character-container-0").on("click", () => {
+            indexvar = 0;
+            characterMove();
+        });
 
-    $(".character-container-1").on("click", () => {
-        indexvar = 1;
-        characterMove();
-    });
+        $(".character-container-1").on("click", () => {
+            indexvar = 1;
+            characterMove();
+        });
 
-    $(".character-container-2").on("click", () => {
-        indexvar = 2;
-        characterMove();
-    });
+        $(".character-container-2").on("click", () => {
+            indexvar = 2;
+            characterMove();
+        });
 
-    $(".character-container-3").on("click", () => {
-        indexvar = 3;
-        characterMove();
-    });
+        $(".character-container-3").on("click", () => {
+            indexvar = 3;
+            characterMove();
+        });
     }
     //function to move the characters from top list to fight area
 
@@ -122,13 +122,6 @@ $(document).ready(function () {
         if (chosen == false) {
             $(".character-container").off();
         }
-
-        // for(i = 0; i < 4; i++){
-        //     if(chosen == false){
-        //     $(".character-container-" + i).off();
-        // }
-        // }
-
     }
 
 
