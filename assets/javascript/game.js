@@ -5,7 +5,7 @@ let obi = {
     name: "Obi-Wan Kenobi",
     hp: 90,
     ap: 10,
-    cap: 50,
+    cap: 13,
     image: "./assets/images/obi.png",
     chosen: false
 }
@@ -15,7 +15,7 @@ let luke = {
     name: "Luke Skywalker",
     hp: 100,
     ap: 15,
-    cap: 30,
+    cap: 20,
     image: "./assets/images/luke.png",
     chosen: false
 }
@@ -23,9 +23,9 @@ let luke = {
 let darths = {
     characterNumber: 2,
     name: "Darth Sidious",
-    hp: 100,
+    hp: 120,
     ap: 12,
-    cap: 40,
+    cap: 5,
     image: "./assets/images/darths.png",
     chosen: false
 }
@@ -33,8 +33,8 @@ let darths = {
 let darthm = {
     characterNumber: 3,
     name: "Darth Maul",
-    hp: 100,
-    ap: 100,
+    hp: 80,
+    ap: 15,
     cap: 20,
     image: "./assets/images/darthm.png",
     chosen: false
@@ -46,7 +46,6 @@ let attacker;
 let chosen = false;
 let attackerChosen = false;
 let indexvar = null;
-let deathCount = allCharacters.length;
 
 
 $(document).ready(function () {
@@ -54,10 +53,12 @@ $(document).ready(function () {
     //generating characters
 
     for (i = 0; i < allCharacters.length; i++) {
+        createDOM();
+    }
     
-    createDOM();
+    addClickEvents();
     
-        function createDOM(){
+    function createDOM(){
         characterContainer = $("<div></div>");
         characterImage = $("<img>");
         characterText = $("<div></div>")
@@ -77,12 +78,11 @@ $(document).ready(function () {
 
         $(".character-container-" + i).append(characterImage);
 
-        characterHealth.text("Health: " + allCharacters[i].hp);
-        $(".character-image-" + i).after(characterHealth);
-    }
-    }
-    addClickEvents();
-
+        characterHealth.text("Health: " + allCharacters[i].hp + "   Attack: " + allCharacters[i].ap);
+        $(".character-image-" + i).after(characterHealth)
+        }
+ 
+    
     // click events for characters
 
     function addClickEvents() {
@@ -114,6 +114,8 @@ $(document).ready(function () {
             $(".character-container-" + indexvar).detach().appendTo("div.character-choice");
             if(attackerChosen == false){
                 attacker = allCharacters[indexvar];
+                console.log(attacker);
+                
             }
             $(".characters").detach().appendTo("div.attack-section");
             $(".characters").children().addClass("active").css("background-color","red");
@@ -125,6 +127,7 @@ $(document).ready(function () {
             $(".character-container-" + indexvar).detach().appendTo("div.defender");
             $(".character-container").removeClass("active").css("background-color", "");
             defender = allCharacters[indexvar];
+            console.log(defender);
             chosen = false;
             console.log("defender");
         }
@@ -137,20 +140,23 @@ $(document).ready(function () {
 
     // click event for reset button
 
-    $("#reset-btn").on("click", () => { resetGame() });
+    $("#reset-btn").on("click", resetGame );
     
     // click event for attack button
 
-    $("#attack-btn").on("click", () => { fight() });
+    $("#attack-btn").on("click", fight );
 
     function fight() {
         
         defender.hp = defender.hp - attacker.ap;
-        attacker.hp = attacker.hp - defender.hp + attacker.cap;
+        attacker.hp = attacker.hp - defender.ap;
+        attacker.ap = attacker.ap + attacker.cap;
         console.log(defender.hp, attacker.hp);
-        $(".health-character-" + defender.characterNumber).text("Health: " + defender.hp);
-        $(".health-character-" + attacker.characterNumber).text("Health: " + attacker.hp);
+        $(".health-character-" + defender.characterNumber).text("Health: " + defender.hp + " Attack: " + defender.ap);
+        $(".health-character-" + attacker.characterNumber).text("Health: " + attacker.hp + " Attack: " + attacker.ap);
         attackerChosen = true;
+
+
 
         if (defender.hp <= 0) {
             $(".defender").empty();
@@ -159,7 +165,6 @@ $(document).ready(function () {
             addClickEvents();
             characterMove();
         }
-
         else if(attacker.hp <= 0) {
             alert("You are dead!");
             resetGame();
@@ -167,32 +172,22 @@ $(document).ready(function () {
 
     }
 
-
-        function resetGame() {
-            location.reload();
-            // console.log("reset");
-            // $(".character-image").remove();
-            // $(".character-container").remove();
-            // chosen = false;
-            // attackerChosen = false;
-            // attacker = undefined;
-            // defender = undefined;
-            // indexvar = null;
-            // createDOM();
-            // addClickEvents();
-        }
-
-    
+    function resetGame() {
+        location.reload();
+        // console.log("reset");
+        // $(".character-image").remove();
+        // $(".character-container").remove();
+        // chosen = false;
+        // attackerChosen = false;
+        // attacker = undefined;
+        // defender = undefined;
+        // indexvar = null;
+        // createDOM();
+        // addClickEvents();
+        } 
 });
 
 //DischooseRandomDefendering Characters
-
-
-
-
-
-
-
 
 
 
