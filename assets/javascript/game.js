@@ -11,40 +11,40 @@ let obi = {
 }
 
 let luke = {
-    "characterNumber": 1,
-    "name": "Luke Skywalker",
-    "hp": 100,
-    "ap": 15,
-    "cap": 30,
-    "image": "./assets/images/luke.png",
-    "chosen": false
+    characterNumber: 1,
+    name: "Luke Skywalker",
+    hp: 100,
+    ap: 15,
+    cap: 30,
+    image: "./assets/images/luke.png",
+    chosen: false
 }
 
 let darths = {
-    "characterNumber": 2,
-    "name": "Darth Sidious",
-    "hp": 100,
-    "ap": 12,
-    "cap": 60,
-    "image": "./assets/images/darths.png",
-    "chosen": false
+    characterNumber: 2,
+    name: "Darth Sidious",
+    hp: 100,
+    ap: 12,
+    cap: 40,
+    image: "./assets/images/darths.png",
+    chosen: false
 }
 
 let darthm = {
-    "characterNumber": 3,
-    "name": "Darth Maul",
-    "hp": 100,
-    "ap": 20,
-    "cap": 55,
-    "image": "./assets/images/darthm.png",
-    "chosen": false
+    characterNumber: 3,
+    name: "Darth Maul",
+    hp: 100,
+    ap: 100,
+    cap: 20,
+    image: "./assets/images/darthm.png",
+    chosen: false
 }
 
-let allCharacters = [obi, luke, darths, darthm];
+const allCharacters = [obi, luke, darths, darthm];
 let defender;
 let attacker;
 let chosen = false;
-let chosen2 = false;
+let attackerChosen = false;
 let indexvar = null;
 let deathCount = allCharacters.length;
 
@@ -54,7 +54,10 @@ $(document).ready(function () {
     //generating characters
 
     for (i = 0; i < allCharacters.length; i++) {
-
+    
+    createDOM();
+    
+        function createDOM(){
         characterContainer = $("<div></div>");
         characterImage = $("<img>");
         characterText = $("<div></div>")
@@ -76,7 +79,7 @@ $(document).ready(function () {
 
         characterHealth.text("Health: " + allCharacters[i].hp);
         $(".character-image-" + i).after(characterHealth);
-
+    }
     }
     addClickEvents();
 
@@ -109,7 +112,7 @@ $(document).ready(function () {
     function characterMove() {
         if (chosen == false) {
             $(".character-container-" + indexvar).detach().appendTo("div.character-choice");
-            if(chosen2 == false){
+            if(attackerChosen == false){
                 attacker = allCharacters[indexvar];
             }
             $(".characters").detach().appendTo("div.attack-section");
@@ -132,7 +135,11 @@ $(document).ready(function () {
         }
     }
 
-    // clickEvent for attack button
+    // click event for reset button
+
+    $("#reset-btn").on("click", () => { resetGame() });
+    
+    // click event for attack button
 
     $("#attack-btn").on("click", () => { fight() });
 
@@ -140,37 +147,42 @@ $(document).ready(function () {
         
         defender.hp = defender.hp - attacker.ap;
         attacker.hp = attacker.hp - defender.hp + attacker.cap;
-
         console.log(defender.hp, attacker.hp);
-
         $(".health-character-" + defender.characterNumber).text("Health: " + defender.hp);
         $(".health-character-" + attacker.characterNumber).text("Health: " + attacker.hp);
-       chosen2 = true;
+        attackerChosen = true;
 
         if (defender.hp <= 0) {
             $(".defender").empty();
-            deathCount--;
-            // if(deathcount < 2){
-            //     alert("All done.")
-            // }
             alert("Defeted!");
+
             addClickEvents();
-           
             characterMove();
         }
 
         else if(attacker.hp <= 0) {
             alert("You are dead!");
-            // resetGame();
-        }
-
-
-
-        function reset() {
-            // reload page;
+            resetGame();
         }
 
     }
+
+
+        function resetGame() {
+            location.reload();
+            // console.log("reset");
+            // $(".character-image").remove();
+            // $(".character-container").remove();
+            // chosen = false;
+            // attackerChosen = false;
+            // attacker = undefined;
+            // defender = undefined;
+            // indexvar = null;
+            // createDOM();
+            // addClickEvents();
+        }
+
+    
 });
 
 //DischooseRandomDefendering Characters
