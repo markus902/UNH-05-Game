@@ -7,7 +7,6 @@ let obi = {
     ap: 10,
     cap: 13,
     image: "./assets/images/obi.png",
-    chosen: false
 }
 
 let luke = {
@@ -17,7 +16,6 @@ let luke = {
     ap: 15,
     cap: 20,
     image: "./assets/images/luke.png",
-    chosen: false
 }
 
 let darths = {
@@ -27,7 +25,6 @@ let darths = {
     ap: 12,
     cap: 5,
     image: "./assets/images/darths.png",
-    chosen: false
 }
 
 let darthm = {
@@ -37,7 +34,6 @@ let darthm = {
     ap: 15,
     cap: 20,
     image: "./assets/images/darthm.png",
-    chosen: false
 }
 
 const allCharacters = [obi, luke, darths, darthm];
@@ -66,10 +62,10 @@ $(document).ready(function () {
             .addClass("health-character-" + i);
         characterImage
             .attr("src", allCharacters[i].image)
-            .addClass("character-image character-image-" + i + " clearfix");
+            .addClass("character-image character-image-" + i);
 
         characterContainer
-            .addClass("character-container-" + i + " justify-content-center character-container")
+            .addClass("character-container-" + i + " justify-content-center character-container animated delay-1s")
             .css("border", "solid green 3px");
         $(".characters").append(characterContainer);
 
@@ -111,6 +107,7 @@ $(document).ready(function () {
 
     function characterMove() {
         if (chosen == false) {
+            $(".character-container-" + indexvar).addClass("pulse");
             $(".character-container-" + indexvar).detach().appendTo("div.character-choice");
             if(attackerChosen == false){
                 attacker = allCharacters[indexvar];
@@ -124,6 +121,8 @@ $(document).ready(function () {
             chosen = true;
         }
         else {
+            $(".character-container-" + indexvar).removeClass("shake");
+            $(".character-container-" + indexvar).addClass("pulse");
             $(".character-container-" + indexvar).detach().appendTo("div.defender");
             $(".character-container").removeClass("active").css("background-color", "");
             defender = allCharacters[indexvar];
@@ -174,16 +173,6 @@ $(document).ready(function () {
 
     function resetGame() {
         location.reload();
-        // console.log("reset");
-        // $(".character-image").remove();
-        // $(".character-container").remove();
-        // chosen = false;
-        // attackerChosen = false;
-        // attacker = undefined;
-        // defender = undefined;
-        // indexvar = null;
-        // createDOM();
-        // addClickEvents();
         } 
 });
 
