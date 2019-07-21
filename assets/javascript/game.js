@@ -13,7 +13,7 @@ let luke = {
     characterNumber: 1,
     name: "Luke Skywalker",
     hp: 100,
-    ap: 15,
+    ap: 20,
     cap: 20,
     image: "./assets/images/luke.png",
 }
@@ -31,7 +31,7 @@ let darthm = {
     characterNumber: 3,
     name: "Darth Maul",
     hp: 80,
-    ap: 15,
+    ap: 16,
     cap: 20,
     image: "./assets/images/darthm.png",
 }
