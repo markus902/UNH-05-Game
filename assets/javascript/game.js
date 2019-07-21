@@ -42,7 +42,7 @@ let attacker;
 let chosen = false;
 let attackerChosen = false;
 let indexvar = null;
-let deathCount;
+let deathCount = 0;
 
 
 $(document).ready(function () {
@@ -139,6 +139,8 @@ $(document).ready(function () {
 
     function fight() {
         
+        console.log(deathCount);
+
         $(".character-container").removeClass("pulse");
         defender.hp = defender.hp - attacker.ap;
         attacker.hp = attacker.hp - defender.ap;
@@ -151,18 +153,19 @@ $(document).ready(function () {
         attackerChosen = true;
 
         if (defender.hp <= 0) {
+            deathCount++;
             $(".defender").empty();
-            alert("Defeted!");
-
+            alert("Opponent defeated!");
             addClickEvents();
             characterMove();
         }
         else if(attacker.hp <= 0) {
-            deathCount++;
             alert("You are dead!");
             resetGame();
         }
-
+        if(deathCount == 3){
+            alert("You win!!!")
+        }
     }
 
     function resetGame() {
