@@ -42,6 +42,7 @@ let attacker;
 let chosen = false;
 let attackerChosen = false;
 let indexvar = null;
+let deathCount;
 
 
 $(document).ready(function () {
@@ -53,31 +54,13 @@ $(document).ready(function () {
     }
     
     addClickEvents();
+
+    $(".reset-btn").on("click", resetGame );  // click event for reset button
+  
+    $(".attack-btn").on("click", fight );   // click event for attack button
+
     
-    function createDOM(){
-        characterContainer = $("<div></div>");
-        characterImage = $("<img>");
-        characterText = $("<div></div>")
-        characterHealth = $("<div></div>")
-            .addClass("health-character-" + i);
-        characterImage
-            .attr("src", allCharacters[i].image)
-            .addClass("character-image character-image-" + i);
-
-        characterContainer
-            .addClass("character-container-" + i + " justify-content-center character-container animated delay-1s")
-            .css("border", "solid green 3px");
-        $(".characters").append(characterContainer);
-
-        characterText.text(allCharacters[i].name);
-        $(".character-container-" + i).append(characterText);
-
-        $(".character-container-" + i).append(characterImage);
-
-        characterHealth.text("Health: " + allCharacters[i].hp + "   Attack: " + allCharacters[i].ap);
-        $(".character-image-" + i).after(characterHealth)
-        }
- 
+    
     
     // click events for characters
 
@@ -105,26 +88,47 @@ $(document).ready(function () {
 
     //function to move the characters from top list to fight area
 
+    function createDOM(){
+        characterContainer = $("<div></div>");
+        characterImage = $("<img>");
+        characterText = $("<div></div>")
+        characterHealth = $("<div></div>")
+            .addClass("health-character-" + i);
+        characterImage
+            .attr("src", allCharacters[i].image)
+            .addClass("character-image character-image-" + i);
+
+        characterContainer
+            .addClass("character-container-" + i + " justify-content-center character-container animated delay-0s")
+            .css("border", "solid green 3px");
+        $(".characters").append(characterContainer);
+
+        characterText.text(allCharacters[i].name);
+        $(".character-container-" + i).append(characterText);
+
+        $(".character-container-" + i).append(characterImage);
+
+        characterHealth.text("Health: " + allCharacters[i].hp + "   Attack: " + allCharacters[i].ap);
+        $(".character-image-" + i).after(characterHealth)
+        }
+
     function characterMove() {
+        $(".character-container").removeClass("shake");
+        $(".hidden").css("display", "block");
         if (chosen == false) {
-            $(".character-container-" + indexvar).addClass("pulse");
-            $(".character-container-" + indexvar).detach().appendTo("div.character-choice");
+            $(".character-container-" + indexvar).addClass("pulse").detach().appendTo("div.character-choice");
             if(attackerChosen == false){
                 attacker = allCharacters[indexvar];
                 console.log(attacker);
                 
             }
-            $(".characters").detach().appendTo("div.attack-section");
-            $(".characters").children().addClass("active").css("background-color","red");
+            $(".characters").detach().appendTo("div.attack-section").children().addClass("active").css("background-color","red");
             $(".character-container-" + indexvar).off();
             console.log("attacker");
             chosen = true;
         }
         else {
-            $(".character-container-" + indexvar).removeClass("shake");
-            $(".character-container-" + indexvar).addClass("pulse");
-            $(".character-container-" + indexvar).detach().appendTo("div.defender");
-            $(".character-container").removeClass("active").css("background-color", "");
+            $(".character-container-" + indexvar).addClass("pulse").detach().appendTo("div.defender").removeClass("active").css("background-color", "");
             defender = allCharacters[indexvar];
             console.log(defender);
             chosen = false;
@@ -133,29 +137,21 @@ $(document).ready(function () {
         console.log(chosen);
         if(chosen == false) {
             $(".character-container").off();
-    
         }
     }
 
-    // click event for reset button
-
-    $("#reset-btn").on("click", resetGame );
-    
-    // click event for attack button
-
-    $("#attack-btn").on("click", fight );
-
     function fight() {
         
+        $(".character-container").removeClass("pulse");
         defender.hp = defender.hp - attacker.ap;
         attacker.hp = attacker.hp - defender.ap;
         attacker.ap = attacker.ap + attacker.cap;
         console.log(defender.hp, attacker.hp);
         $(".health-character-" + defender.characterNumber).text("Health: " + defender.hp + " Attack: " + defender.ap);
         $(".health-character-" + attacker.characterNumber).text("Health: " + attacker.hp + " Attack: " + attacker.ap);
+        $(".character-container-" + defender.characterNumber).addClass("shake");
+        $(".character-container-" + attacker.characterNumber).addClass("shake");
         attackerChosen = true;
-
-
 
         if (defender.hp <= 0) {
             $(".defender").empty();
@@ -165,6 +161,7 @@ $(document).ready(function () {
             characterMove();
         }
         else if(attacker.hp <= 0) {
+            deathCount++;
             alert("You are dead!");
             resetGame();
         }
