@@ -58,11 +58,8 @@ $(document).ready(function () {
     $(".reset-btn").on("click", resetGame );  // click event for reset button
   
     $(".attack-btn").on("click", fight );   // click event for attack button
-
     
-    
-    
-    // click events for characters
+    // add click events for characters
 
     function addClickEvents() {
         $(".character-container-0").on("click", () => {
@@ -173,51 +170,16 @@ $(document).ready(function () {
         } 
 });
 
-//DischooseRandomDefendering Characters
+//option for later, to chooose reandom defender
 
-
-
-
-
-
-
-// Random defender choice
-
-// $(".character-container-0").on("click", ()=>{
-//     $("div.character-container-0").detach().appendTo("div.character-choice");
-//     allCharacters[0].chosen = true;
-//     attacker = allCharacters[0];
-//     chooseRandomDefender();
-// });
-// $(".character-container-1").on("click", ()=>{
-//     $("div.character-container-1").detach().appendTo("div.character-choice");   
-//     allCharacters[1].chosen = true;
-//     attacker = allCharacters[0];
-//     chooseRandomDefender();
-// });
-// $(".character-container-2").on("click", ()=>{
-//     $("div.character-container-2").detach().appendTo("div.character-choice");
-//     allCharacters[2].chosen = true;
-//     attacker = allCharacters[0];
-//     chooseRandomDefender();
-// });
-// $(".character-container-3").on("click", ()=>{
-//     $("div.character-container-3").detach().appendTo("div.character-choice");
-//     allCharacters[3].chosen = true;
-//     attacker = allCharacters[0];
-//     chooseRandomDefender();
-// });
-
-// function to choose defender
-
-function chooseRandomDefender() {
-    let computerChoice = Math.floor(Math.random() * allCharacters.length);
-    let chosenCharacter = allCharacters[computerChoice].chosen;
-    if (chosenCharacter == false) {
-        $(".character-container-" + computerChoice).detach().appendTo("div.defender");
-    }
-    else {
-        chooseRandomDefender();
-    }
-    defender = allCharacters[computerChoice];
-};
+// function chooseRandomDefender() {
+//     let computerChoice = Math.floor(Math.random() * allCharacters.length);
+//     let chosenCharacter = allCharacters[computerChoice].chosen;
+//     if (chosenCharacter == false) {
+//         $(".character-container-" + computerChoice).detach().appendTo("div.defender");
+//     }
+//     else {
+//         chooseRandomDefender();
+//     }
+//     defender = allCharacters[computerChoice];
+// };
