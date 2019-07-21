@@ -13,9 +13,21 @@ h2{
     font-size: 40px;
 }
 
+p{
+    color: wihte;
+}
+
+.hidden{
+    display: none;
+}
+
+.row{
+    color: white;
+}
+
 h1{
     text-align: center;
-    font-size: 8rem !important;
+    font-size: 5rem !important;
     color: white;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
@@ -25,11 +37,11 @@ background-image: url("../../assets/images/background.jpg");
 }
 
 .character-image{
-    max-height: 200px;
+    max-height: 150px;
 }
 
 div.character-container{
-    width: 200px;
+    /* width: 200px; */
     margin: 5px;
     float: left;
     color: white;

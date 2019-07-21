@@ -24,44 +24,43 @@
             <div class="col-12">
                 <h1 class="animated slideInDown delay-1s">Star Wars RPG</h1>
                 <form id="form">
-                    <input type="radio" name="random-opponent" value="false" checked> Choose random opponent<br>
-                    <input type="radio" name="random-opponent" value="true"> Choose opponent yourself
+                    <!-- <input type="radio" name="random-opponent" value="false" checked> Choose random opponent<br>
+                    <input type="radio" name="random-opponent" value="true"> Choose opponent yourself -->
                 </form>
             </div>   
         </div> 
 
-        <div class="row">
-            <div class="col-12 characters"></div>
+        <div class="row text-center">
+            <div class="col-12 characters mt-4"></div>
         </div>
        
         <div class="row">
             <div class="col-6 ">
-                <h4>Your Character</h4>
+                <h4 class="hidden">Your Character</h4>
                 <div class="character-choice"></div>
             </div>
             
             <div class="col-6 defender-headline">
-                <h4>Defender</h4>
-                <div class="col-12 defender"></div>
+                <h4 class="hidden">Defender</h4>
+                <div class="defender"></div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-12 attack-section">
-                <h4>Enemies available to attack. 
-                </h4>
-            </div>
-
-              
-        <div class="row">
-            <div class="col-12">
-                <button id="attack-btn">Attack!!!</button>
-                <button id="reset-btn">Reset!!!</button>
+            <div class="col-12 attack-section mt-4 pt-3">
+                <h4 class="hidden">Enemies available to attack.</h4>
             </div>
         </div>
 
+        <div class="row text-center mt-4">
+            <div class="col-12">       
+                <button type="button" class="btn btn-dark attack-btn">Attack!!!</button>
+                <button type="button" class="btn btn-dark rest-btn">Reset Game</button>
+                <br><br>
+                <div class="row"><p>Instructions: Choose a character and beat all remaining ones in the list. Your attacke will increase with experience.</p></div>
+            </div>
+        </div>
     </div>
-
 <script src="./assets/javascript/game.js"></script>
 
 
