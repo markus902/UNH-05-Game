@@ -47,17 +47,6 @@ let deathCount = 0;
 
 $(document).ready(function () {
 
-    //generating characters
-
-    for (i = 0; i < allCharacters.length; i++) {
-        createDOM();
-    }
-    
-    addClickEvents();
-
-    $(".reset-btn").on("click", resetGame );  // click event for reset button
-  
-    $(".attack-btn").on("click", fight );   // click event for attack button
     
     // add click events for characters
 
@@ -171,6 +160,17 @@ $(document).ready(function () {
     function resetGame() {
         location.reload();
         } 
+
+
+    for (i = 0; i < allCharacters.length; i++) {
+        createDOM();
+    }
+    
+    addClickEvents();
+
+    $(".reset-btn").on("click", resetGame );  // click event for reset button
+    
+    $(".attack-btn").on("click", fight );   // click event for attack button
 });
 
 //option for later, to chooose reandom defender
